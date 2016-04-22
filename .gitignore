@@ -210,3 +210,5 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+/vmq_task.VC.VC.opendb
+/vmq_task.VC.db
