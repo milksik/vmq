@@ -12,7 +12,7 @@ int main()
 	player_factory factory;
 
 	mgr->set_player_factory(&factory);
-	mgr->create_worker(10);
+	mgr->create_worker(100);
 	mgr->start();
 
 	while (true)
@@ -47,7 +47,7 @@ int main()
 				for (int i = 0; i < 10000; i++)
 				{
 
-					for (int w = 0; w < 1000; w++)
+					for (int w = 0; w < 10; w++)
 					{
 						mgr->send_player_postee( i, [](actor_ptr actor, int execute_code){
 
