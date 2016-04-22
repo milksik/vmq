@@ -34,21 +34,24 @@ void player_worker::add_player(player_key_type key,  player_ptr actor )
 
 void player_worker::do_work()
 {
-	int execute_count = 0;
+	
 
 	while (terminated_ == false )
 	{
+		int execute_count = 0;
 		//worker狼 postee贸府
 		execute_count += execute_task();
 
 
 		//器窃等 player狼 postee贸府
 
+		
 		for (auto & a : actor_map_)
 		{
-			execute_count += a.second->execute_task();
+			execute_count += a.second->execute_task( 1000 );
+			std::this_thread::sleep_for(std::chrono::milliseconds(1));
 		}
-
+		
 
 		if (execute_count == 0)
 		{
