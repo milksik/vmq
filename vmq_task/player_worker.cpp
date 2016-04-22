@@ -26,6 +26,8 @@ void player_worker::stop()
 void player_worker::add_player(player_key_type key,  player_ptr actor )
 {
 	actor_map_.insert( { key, actor });
+
+
 }
 
 
