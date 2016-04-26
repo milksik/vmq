@@ -7,7 +7,7 @@
 
 
 
-typedef std::function<void(actor_ptr, int execute_code )>	player_postee;
+typedef std::function<void(player_ptr, int execute_code )>	player_postee;
 typedef std::function<void(player_worker_ptr)>				worker_postee;
 
 
@@ -22,7 +22,6 @@ public:
 	void stop();
 	void set_player_factory(player_factory* factory) { factory_ = factory; }
 	
-
 	player_key_type new_player_key(int n) { return n; }
 
 	void create_worker(int worker_size );
@@ -30,7 +29,6 @@ public:
 	
 	void send_worker_postee(int worker_key, worker_postee&& postee);					//add, delete player 처리
 	void send_player_postee(player_key_type key, player_postee&& postee);				//player queue에 전단시
-
 
 private:
 	void do_work();
@@ -40,8 +38,6 @@ private:
 	std::shared_ptr< std::thread >										thread_ptr_;
 	std::vector< player_worker_ptr >									workers_;
 	std::unordered_map< player_key_type, player_ptr >					actor_map_;
-	
-	//std::queue<unsigned short>											player_ids_;
 	
 };
 

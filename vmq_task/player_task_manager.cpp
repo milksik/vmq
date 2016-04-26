@@ -79,7 +79,7 @@ void player_task_manager::create_player(player_key_type player_key, player_poste
 	{
 		worker->add_player(player_key, player);
 
-		if (f_postee == nullptr)
+		if (f_postee != nullptr)
 		{
 			f_postee(player, 0);
 		}

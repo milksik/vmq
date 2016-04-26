@@ -13,9 +13,12 @@ public:
 	void set_key(player_key_type key) { key_ = key; }
 
 	void send_shared_postee(shared_postee&& postee);
+	
+	int						complete_count_;
 
 private:
 	player_key_type			key_;
+	
 };
 
 typedef std::shared_ptr< player > player_ptr;

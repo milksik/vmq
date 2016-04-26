@@ -4,7 +4,6 @@
 
 actor::actor()
 {
-	// 일단 작업
 
 }
 
@@ -21,20 +20,37 @@ int actor::execute_task( int pop_count )
 	{
 		std::function<void()> task;
 
+#if QUEUE_TYPE == LOCK_QUEUE
 		{
 			std::unique_lock<std::mutex> lock(this->queue_mutex_);
 
-			if (tasks_queue_.empty())
+			if (task_queue_.empty())
 				break;
 
-			task = std::move(this->tasks_queue_.front());
-			tasks_queue_.pop();
+			task = std::move(this->task_queue_.front());
+			task_queue_.pop();
 		}
+#else
+		if (task_queue_.dequeue(task) == false)
+			break;
+
+#endif
 
 		if (task != nullptr)
 		{
-			task();
-			execute_count++;
+			try
+			{
+				task();
+			}
+			catch (const std::bad_function_call&)
+			{
+				std::cout << "bad function call" << std::endl;
+			}
+			catch (...)
+			{
+				std::cout << "unknown exception" << std::endl;
+			}
+
 		}
 	}
 

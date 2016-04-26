@@ -4,6 +4,7 @@
 
 player::player() :key_(player_key_type())
 {
+	complete_count_ = 0;
 }
 
 
